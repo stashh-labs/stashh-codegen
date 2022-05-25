@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stashh-codegen", "stashh-codegen\stashh-codegen.csproj", "{F00753CB-88C6-4318-892D-06900C415544}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F00753CB-88C6-4318-892D-06900C415544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F00753CB-88C6-4318-892D-06900C415544}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F00753CB-88C6-4318-892D-06900C415544}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F00753CB-88C6-4318-892D-06900C415544}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B200793-B196-4DC5-B20A-A0D63CB446A1}
+	EndGlobalSection
+EndGlobal

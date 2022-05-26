@@ -5,7 +5,6 @@ namespace stashh_codegen;
 public static class CodeGenerator
 {
     private static readonly Random _random = new Random();
-    private const string Digits = "BCDFGHJKLMNPQRSTVWXYZ";
 
     public static IEnumerable<ClaimCode> Generate()
     {
@@ -13,34 +12,37 @@ public static class CodeGenerator
 
         do
         {
-            var newCode = $"{GenerateSeriesCodeForIndex(codes.Count)}{GenerateCode(8)}";
+            var newCode = $"{GenerateSeriesCodeForIndex(codes.Count)}{GenerateCode(Config.GetInt(Config.Constants.CodeLength))}";
 
             if (!codes.ContainsKey(newCode))
             {
                 codes.Add(newCode, 0);
             }
-        } while (codes.Count < 5000);
+        } while (codes.Count < Config.GetInt(Config.Constants.TotalCodes));
 
         return codes.Select(c => new ClaimCode { Code = c.Key });
     }
 
     private static string GenerateSeriesCodeForIndex(int index)
     {
-        var seriesIndex = index / 100;
+        var digits = Config.GetString(Config.Constants.Digits);
 
-        var seriesA = Digits[(seriesIndex / Digits.Length) % Digits.Length];
-        var seriesB = Digits[seriesIndex % Digits.Length];
+        var seriesIndex = index / Config.GetInt(Config.Constants.SeriesSize);
+
+        var seriesA = digits[(seriesIndex / digits.Length) % digits.Length];
+        var seriesB = digits[seriesIndex % digits.Length];
 
         return $"{seriesA}{seriesB}";
     }
 
     private static string GenerateCode(int size)
     {
+        var digits = Config.GetString(Config.Constants.Digits);
         var builder = new StringBuilder(size);
 
         for (var i = 0; i < size; i++)
         {
-            builder.Append(Digits[_random.Next(0, Digits.Length)]);
+            builder.Append(digits[_random.Next(0, digits.Length)]);
         }
 
         return builder.ToString();

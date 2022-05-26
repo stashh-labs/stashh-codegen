@@ -6,25 +6,23 @@ using CsvHelper;
 
 public static class FileSystem
 {
-    private const string _outputDirectory = "codes";
-
     public static bool OutputDirectoryExists()
     {
-        return Directory.Exists(_outputDirectory);
+        return Directory.Exists(Config.GetString(Config.Constants.OutputDirectory));
     }
-    
+
     public static string EnsureOutputDirectoryExists()
     {
-        Directory.CreateDirectory(_outputDirectory);
+        Directory.CreateDirectory(Config.GetString(Config.Constants.OutputDirectory));
 
-        return _outputDirectory;
+        return Config.GetString(Config.Constants.OutputDirectory);
     }
-    
+
     public static async Task WriteCodesToFile(IEnumerable<ClaimCode> codes)
     {
-        Directory.CreateDirectory(_outputDirectory);
+        Directory.CreateDirectory(Config.GetString(Config.Constants.OutputDirectory));
 
-        await using var writer = new StreamWriter(Path.Join(_outputDirectory, "codes.csv"));
+        await using var writer = new StreamWriter(Path.Join(Config.GetString(Config.Constants.OutputDirectory), $"{Config.GetString(Config.Constants.OutputFilename)}.csv"));
         await using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
 
         try
@@ -35,9 +33,5 @@ public static class FileSystem
         {
             await writer.FlushAsync();
         }
-    }
-
-    public static async Task WriteQrToFile()
-    {
     }
 }

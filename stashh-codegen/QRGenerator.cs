@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Text;
 using QRCoder;
 
@@ -18,15 +19,13 @@ public static class QRGenerator
     
     private static async Task GenerateQrCode(string code)
     {
-        var generator = new PayloadGenerator.Url($"https://claim.stashh.io/?code={code}");
+        var generator = new PayloadGenerator.Url($"{Config.GetString(Config.Constants.UrlBase)}{code}");
 
         var qrCodeData = _generator.CreateQrCode(generator);
         var qrCode = new PngByteQRCode(qrCodeData);
         var qrCodeAsPng = qrCode.GetGraphic(5, drawQuietZones: false);
 
-        var OutputDirectory = FileSystem.EnsureOutputDirectoryExists();
-
-        await File.WriteAllBytesAsync(Path.Join(OutputDirectory, $"{code}.png"), qrCodeAsPng);
+        await File.WriteAllBytesAsync(Path.Join(Config.GetString(Config.Constants.OutputDirectory), $"{code}.png"), qrCodeAsPng);
     }
 
 
